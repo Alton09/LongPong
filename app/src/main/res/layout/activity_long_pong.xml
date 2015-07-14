@@ -1,0 +1,25 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linear"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".LongPongActivity" >
+
+    <TextView
+        android:id="@+id/msgBox"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/lp_fragment_score_view_height"
+        android:background="#ff000000"
+        android:text="@string/startscore"
+        android:textSize="75sp"
+        android:gravity="right"
+        android:textColor="#ffffffff" />
+
+    <FrameLayout
+        android:id="@+id/maincontainer"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+    </FrameLayout>
+
+</LinearLayout>

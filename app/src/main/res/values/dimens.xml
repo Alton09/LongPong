@@ -1,0 +1,25 @@
+<resources>
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="lp_fragment_score_view_height">100dp</dimen>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="paddle_width_small">10dp</dimen>
+    <dimen name="paddle_width_large">20dp</dimen>
+    <dimen name="paddle_max_length_small">50dp</dimen>
+    <dimen name="paddle_max_length_large">100dp</dimen>
+    <dimen name="ball_size_small">16dp</dimen>
+    <dimen name="ball_size_large">32dp</dimen>
+    <dimen name="ball_init_pos_x_small">200dp</dimen>
+    <dimen name="ball_init_pos_y_small">300dp</dimen>
+    <dimen name="ball_init_pos_x_large">300dp</dimen>
+    <dimen name="ball_init_pos_y_large">300dp</dimen>
+    <dimen name="ball_init_speed_small">.3dp</dimen>
+    <dimen name="ball_init_speed_large">.3dp</dimen>
+    <dimen name="wall_width">10dp</dimen>
+    <dimen name="wall_height">10dp</dimen>
+    <dimen name="off_screen">83dp</dimen>
+    
+
+</resources>
+

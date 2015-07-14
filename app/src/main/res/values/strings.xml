@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string ignore="MissingTranslation" name="app_name" >longpong</string>
+    <string name="action_settings" translatable="false">Settings</string>
+    <string name="spinner_prompt" translatable="false">Please choose a device</string>
+    <string name="connect_b" translatable="false">Connect</string>
+    <string name="single_player_button_str" translatable="false">Single Player Test</string>
+    <string name="send_b" translatable="false">Send</string>
+    <string name="test" translatable="false">IT WORKS!!!</string>
+    <string name="startscore" translatable="false">0</string>
+
+</resources>
