@@ -33,8 +33,8 @@ public class LongPongActivity extends FragmentActivity {
     public static final int    NEW_GAME      = 8;
     public static final int    SINGLE_PLAYER = 9;
 
-    private BTFragment            btFragment;
-    private LPFragment            lpFragment;
+    private BTFragment mBTFragment;
+    private LPFragment mLPFragment;
 
     /**
      * Bluetooth fragment tag name for the fragment manager.
@@ -78,18 +78,18 @@ public class LongPongActivity extends FragmentActivity {
         mHandler.start();
         
         // Create fragments
-        btFragment = new BTFragment();
+        mBTFragment = new BTFragment();
 
         FragmentTransaction fragmentTransaction = getSupportFragmentManager()
                 .beginTransaction();
-        fragmentTransaction.add(R.id.maincontainer, btFragment, TAG_BT);
+        fragmentTransaction.add(R.id.maincontainer, mBTFragment, TAG_BT);
         fragmentTransaction.commit();
 
         scoreBoard = (TextView) this.findViewById(R.id.msgBox);
     }
 
     protected void setBallStart(float x, float percY, Velocity v) {
-        lpFragment.setBallStart(x, percY, v);
+        mLPFragment.setBallStart(x, percY, v);
     }
 
     protected void sendBallNotice(Ball b, float height) {
@@ -100,11 +100,11 @@ public class LongPongActivity extends FragmentActivity {
         StringBuilder sb = new StringBuilder("ball " + b.getX() + " " + y + " "
                 + speedX + " " + speedY + " " + angle);
         Log.i("BALL", "ball message " + sb.toString());
-        btFragment.callWrite(sb.toString());
+        mBTFragment.callWrite(sb.toString());
     }
 
     protected void setBallStart() {
-        lpFragment.setBallStart();
+        mLPFragment.setBallStart();
 
     }
 
@@ -152,7 +152,7 @@ public class LongPongActivity extends FragmentActivity {
      */
     public void sendScoreNotice() {
         Log.i("SCORE / LONGPONGACTIVITY", "sending notice to update score");
-        btFragment.callWrite("score ");
+        mBTFragment.callWrite("score ");
     }
 
     /**
@@ -183,7 +183,7 @@ public class LongPongActivity extends FragmentActivity {
 
         // Stop on going threads
         gameFinished = true; // Stops the HandlerThread
-        LpBluetooth lpBluetooth = btFragment.getLpBluetooth();
+        LpBluetooth lpBluetooth = mBTFragment.getLpBluetooth();
         stopServerThread(lpBluetooth);
         stopConnectedThread(lpBluetooth);
 
@@ -242,13 +242,13 @@ public class LongPongActivity extends FragmentActivity {
      * @return the reference to the LPFragment object.
      */
     public LPFragment getLPFragment() {
-        return this.lpFragment;
+        return this.mLPFragment;
     }
 
     /**
      * Gives this object a reference to an LPFragment object.
      */
     public void setLPFragment(LPFragment lpFragment) {
-        this.lpFragment = lpFragment;
+        this.mLPFragment = lpFragment;
     }
 }
