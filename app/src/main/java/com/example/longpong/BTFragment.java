@@ -1,5 +1,6 @@
 package com.example.longpong;
 
+import static com.example.longpong.LongPongActivity.DEBUG_MODE;
 import java.util.Set;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
@@ -41,7 +42,6 @@ import android.widget.Toast;
  */
 public class BTFragment extends Fragment {
     private static final int     REQUEST_ENABLE_BT = 1;
-    private final boolean        DEBUG_MODE = false;
     protected BluetoothAdapter   mAdapter;
     private Button               connectButton, singlePlayerButton;
     private LpBluetooth          mLpBluetooth;

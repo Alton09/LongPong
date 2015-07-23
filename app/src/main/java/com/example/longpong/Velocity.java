@@ -1,5 +1,7 @@
 package com.example.longpong;
 
+import static com.example.longpong.LongPongActivity.DEBUG_MODE;
+
 /**
  * The velocity of a GameObject. Velocity is a vector, thus this object contains
  * an X component, Y component, and angle for direction.
@@ -9,7 +11,6 @@ package com.example.longpong;
  * 
  */
 public class Velocity {
-    private final boolean DEBUG_MODE = false;
     private float speedX, speedY, angle;
 
     /**

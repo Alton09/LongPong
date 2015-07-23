@@ -1,5 +1,6 @@
 package com.example.longpong;
 
+import static com.example.longpong.LongPongActivity.DEBUG_MODE;
 import android.util.Log;
 
 /**
@@ -10,9 +11,10 @@ import android.util.Log;
  * @version 1.0
  */
 public class Ball extends GameObject {
-    private final boolean DEBUG_MODE = false;
     private Velocity velocity;
     private String direction; // Used for collision detection
+
+    private float multiplier;
 
     /**
      * Creates a new ball object.
@@ -44,7 +46,7 @@ public class Ball extends GameObject {
      * Changes the speed of the ball by summing its current speed with the
      * amount parameter.
      * 
-     * @param amount The amount to accelerate or decelerate the ball.
+     * @param amountX The amount to accelerate or decelerate the ball's x component.
      */
     public void changeSpeed(float amountX, float amountY) {
         velocity.changeSpeed(amountX, amountY);
@@ -65,6 +67,13 @@ public class Ball extends GameObject {
             velocity.setAngle(Math.abs(angle - 360));
 
         Log.d("Angle", "Angle: " + velocity.getAngle());
+    }
+
+    /**
+     * Resets the ball's speed
+     */
+    public void resetSpeed() {
+        velocity.setSpeed(multiplier, multiplier);
     }
 
     /**
@@ -163,5 +172,20 @@ public class Ball extends GameObject {
      */
     public float getAngle() {
         return velocity.getAngle();
+    }
+
+    /**
+     * Returns the Ball's dpi multiplier.
+     * @return The multiplier.
+     */
+    public float getMultiplier() {
+        return multiplier;
+    }
+    /**
+     * Sets the Ball's dpi multiplier.
+     * @param multiplier The new multiplier.
+     */
+    public void setMultiplier(float multiplier) {
+        this.multiplier = multiplier;
     }
 }
