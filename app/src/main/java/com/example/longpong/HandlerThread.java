@@ -15,6 +15,7 @@ public class HandlerThread extends Thread {
     private LongPongActivity activity;
     private MainHandler handler;
     private LPFragment lpFragment;
+    private int dpi;
 
     /**
      * Gets a reference to the LongPongActivity.
@@ -92,6 +93,14 @@ public class HandlerThread extends Thread {
      */
     public Message obtainMessage(int what, Object obj) {
         return handler.obtainMessage(what, obj);
+    }
+
+    /**
+     * Sets this instance's dpi field.
+     * @param dpi The device's dpi.
+     */
+    public void setDpi(int dpi) {
+        this.dpi = dpi;
     }
 
     /*
@@ -183,7 +192,7 @@ public class HandlerThread extends Thread {
                             } else if (message[0].equals("ball")) {
                                 // Increment Ball speed on this device
                                 Ball ball = game.getBall();
-                                ball.changeSpeed(.2f, .2f);
+                                ball.changeSpeed(.0005f * dpi, .0005f * dpi);
 
                                 // Set the remaining ball variables
                                 float x = Float.valueOf(message[1]);
@@ -196,8 +205,8 @@ public class HandlerThread extends Thread {
 
                                 // Display ball speed for testing.
                                 if(DEBUG_MODE)
-                                Toast.makeText(activity,"SpeedX: " + speedX
-                                        + " SpeedY: " + speedY, Toast.LENGTH_SHORT).show();
+                                Log.i("HandlerThread","SpeedX: " + speedX
+                                        + " SpeedY: " + speedY);
 
                                 activity.setBallStart(x, percY, v);
                             } else {

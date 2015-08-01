@@ -2,6 +2,7 @@ package com.example.longpong;
 
 import java.util.UUID;
 
+import android.bluetooth.BluetoothAdapter;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
@@ -164,6 +165,9 @@ public class LongPongActivity extends FragmentActivity {
     @Override
     public void onDestroy() {
         super.onDestroy();
+
+        // Disable Bluetooth
+        BluetoothAdapter.getDefaultAdapter().disable();
 
         // Stop on going threads
         mGameFinished = true; // Stops the HandlerThread

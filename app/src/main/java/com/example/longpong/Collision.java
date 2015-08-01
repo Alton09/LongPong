@@ -18,6 +18,7 @@ import android.util.Log;
  */
 public class Collision {
 	private GameFramework game;
+	private int dpi;
 
 	/**
 	 * Constructs a Collision object.
@@ -350,7 +351,7 @@ public class Collision {
 		if (object.getType().equals("paddle") ||
 		    object.getType().equals("test wall")) {
 			// Speed up ball slightly
-			ball.changeSpeed(.2f, .2f);
+			ball.changeSpeed(.0005f * dpi, .0005f * dpi);
 			if(DEBUG_MODE)
 			    Log.i("Collision", "paddle");
 			// Turn angle based on location of collision
@@ -496,4 +497,13 @@ public class Collision {
 						+ "\nlambda:" + lamda);
 
 	}
+
+	/**
+	 * Sets this instance's dpi field.
+	 * @param dpi The device's dpi.
+	 */
+	public void setDpi(int dpi) {
+		this.dpi = dpi;
+	}
+
 }

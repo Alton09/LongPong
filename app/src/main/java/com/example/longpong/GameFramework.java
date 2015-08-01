@@ -221,6 +221,8 @@ public class GameFramework extends View {
         activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
         int dpi = metrics.densityDpi;
         multiplier = dpi / 160f;
+        mHandler.setDpi(dpi);
+        collision.setDpi(dpi);
         if (DEBUG_MODE) Log.i("GameFramework", "Multiplier: " + multiplier + " DPI: " + dpi);
 
         // Ball Variables
@@ -231,9 +233,9 @@ public class GameFramework extends View {
         ballSpeedX = multiplier;
         ballSpeedY = multiplier;
 
-            /*
-             * Paddle variables
-             */
+        /*
+         * Paddle variables
+         */
         maxLength = (int) ballHeight * 2;
         paddleWidth = ballWidth;
 
