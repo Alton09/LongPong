@@ -6,8 +6,8 @@
 
 package com.example.longpong;
 
+import static com.example.longpong.LongPongActivity.DEBUG_MODE;
 import java.util.ArrayList;
-
 import android.util.Log;
 
 /**
@@ -17,7 +17,6 @@ import android.util.Log;
  * 
  */
 public class Collision {
-    private final boolean DEBUG_MODE = false;
 	private GameFramework game;
 
 	/**
@@ -339,12 +338,12 @@ public class Collision {
 	}
 
 	/**
-	 * Change ball's behavior based on collision.
+	 * Perform in game events based on what the ball collides with.
 	 * 
 	 * @param ball
-	 *            The ball.
+	 *            The in game ball.
 	 * @param object
-	 *            The object to check against the ball
+	 *            The object that collided with the ball.
 	 */
 	private void action(Ball ball, GameObject object) {
 		// Perform specific action based on object type
@@ -353,7 +352,7 @@ public class Collision {
 			// Speed up ball slightly
 			ball.changeSpeed(.2f, .2f);
 			if(DEBUG_MODE)
-			    Log.i("Collision Action", "paddle");
+			    Log.i("Collision", "paddle");
 			// Turn angle based on location of collision
 			String dir = ball.getDirection();
 
@@ -362,13 +361,13 @@ public class Collision {
 			 */
 			if (dir.equals("straightLeft")) {
 			    if(DEBUG_MODE)
-	                Log.i("Collision Action", "Right to Left Collision");
+	                Log.i("Collision", "Right to Left Collision");
 				ball.setAngle(180);
 			}
 
 			else if (dir.equals("topLeft")) {
 			    if(DEBUG_MODE)
-                    Log.i("Collision Action", "Top Left Collision");
+                    Log.i("Collision", "Top Left Collision");
 				// get random number between 210 to 240
 				int num = 210 + (int) (Math.random() * ((240 - 210) + 1));
 				ball.setAngle(num);
@@ -376,7 +375,7 @@ public class Collision {
 
 			else if (dir.equals("bottomLeft")) {
 			    if(DEBUG_MODE)
-                    Log.i("Collision Action", "Bottom Left Collision");
+                    Log.i("Collision", "Bottom Left Collision");
 				// get random number between 130 to 150
 				int num = 130 + (int) (Math.random() * ((150 - 130) + 1));
 				ball.setAngle(num);
@@ -387,13 +386,13 @@ public class Collision {
 			 */
 			else if (dir.equals("straightRight")) {
 			    if(DEBUG_MODE)
-                    Log.i("Collision Action", "Left To Right Collision");
+                    Log.i("Collision", "Left To Right Collision");
 				ball.setAngle(0);
 			}
 
 			else if (dir.equals("topRight")) {
 			    if(DEBUG_MODE)
-                    Log.i("Collision Action", "Top Right Collision");
+                    Log.i("Collision", "Top Right Collision");
 				// get random number between 300 to 330
 				int num = 300 + (int) (Math.random() * ((330 - 300) + 1));
 				ball.setAngle(num);
@@ -401,7 +400,7 @@ public class Collision {
 
 			else if (dir.equals("bottomRight")) {
 			    if(DEBUG_MODE)
-                    Log.i("Collision Action", "Bottom Right Collision");
+                    Log.i("Collision", "Bottom Right Collision");
 				// get random number between 30 to 60
 				int num = 30 + (int) (Math.random() * ((60 - 30) + 1));
 				ball.setAngle(num);
@@ -412,19 +411,19 @@ public class Collision {
 			 */
 			else if (dir.equals("top") || dir.equals("bottom")) {
 			    if(DEBUG_MODE)
-                    Log.i("Collision Action", "Top or Bottom Collision");
+                    Log.i("Collision", "Top or Bottom Collision");
 				ball.turn(180);
 			}
 		}
 
 		else if (object.getType().equals("exit")) {
-			Log.i("Wall", "EXIT!!");
+			Log.i("Collision", "EXIT!!");
 			game.toggleHasBall();
 			game.loseBall(GameFramework.EXIT);
 		}
 
 		else if (object.getType().equals("goal")) {
-			Log.i("Wall", "GOAL!!");
+			Log.i("Collision", "GOAL!!");
 			game.toggleHasBall();
 			game.loseBall(GameFramework.GOAL);
 		}

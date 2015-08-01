@@ -1,5 +1,6 @@
 package com.example.longpong;
 
+import static com.example.longpong.LongPongActivity.DEBUG_MODE;
 import android.util.Log;
 
 /**
@@ -9,7 +10,6 @@ import android.util.Log;
  *
  */
 public class GameLoop extends Thread{
-    private final boolean DEBUG_MODE = false;
     private GameFramework game;
     
     public GameLoop(GameFramework game) {

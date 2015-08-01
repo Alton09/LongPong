@@ -1,5 +1,6 @@
 package com.example.longpong;
 
+import static com.example.longpong.LongPongActivity.DEBUG_MODE;
 import java.util.Arrays;
 import java.util.Locale;
 import android.annotation.SuppressLint;
@@ -8,16 +9,16 @@ import android.os.Message;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
+import android.widget.Toast;
 
 public class HandlerThread extends Thread {
-    private final boolean DEBUG_MODE = false;
     private LongPongActivity activity;
-    private MainHandler      handler;
+    private MainHandler handler;
     private LPFragment lpFragment;
 
     /**
      * Gets a reference to the LongPongActivity.
-     * 
+     *
      * @param activity The reference to the LongPongActivity.
      */
     public HandlerThread(LongPongActivity activity) {
@@ -46,14 +47,14 @@ public class HandlerThread extends Thread {
     public void setGame(GameFramework game) {
         handler.game = game;
     }
-    
+
     /**
      * Creates a LPFragment to display the game in.
      */
     public void createLPFragment() {
         lpFragment = new LPFragment(this);
     }
-    
+
     /**
      * Calls the Handler class method obtainMessage(). See Google API for more
      * information.
@@ -92,16 +93,17 @@ public class HandlerThread extends Thread {
     public Message obtainMessage(int what, Object obj) {
         return handler.obtainMessage(what, obj);
     }
-    
+
     /*
      * Handles Message passing communication between threads.
      */
     @SuppressLint("HandlerLeak")
     private class MainHandler extends Handler {
         private LongPongActivity activity;
-        private FragmentManager  myFragmentManager;
-        private GameFramework    game;
-        
+        private FragmentManager myFragmentManager;
+        private GameFramework game;
+        private final boolean DEBUG_MODE = false;
+
         @Override
         public void handleMessage(Message msg) {
             final int WHAT = msg.what, ARG1 = msg.arg1;
@@ -162,7 +164,7 @@ public class HandlerThread extends Thread {
                             String[] message = new String(buffer)
                                     .toLowerCase(Locale.ENGLISH).trim()
                                     .split("\\s");
-                            
+
                             Log.i("DATA_READ", "byte to string = " + message[0]);
                             if (message[0].equals("score")) {
                                 Log.i("SCORE /LONGPONGACTIVITY",
@@ -178,18 +180,27 @@ public class HandlerThread extends Thread {
                                 lpFragment.toggleGameHasBall();
                                 activity.setBallStart();
                                 // }
-                            }
-                            else if (message[0].equals("ball")) {
+                            } else if (message[0].equals("ball")) {
+                                // Increment Ball speed on this device
+                                Ball ball = game.getBall();
+                                ball.changeSpeed(.2f, .2f);
+
+                                // Set the remaining ball variables
                                 float x = Float.valueOf(message[1]);
                                 float percY = Float.valueOf(message[2]);
-                                float speedX = Float.valueOf(message[3]);
-                                float speedY = Float.valueOf(message[4]);
-                                float angle = Float.valueOf(message[5]);
+                                float speedX = ball.getSpeedX();
+                                float speedY = ball.getSpeedY();
+                                float angle = Float.valueOf(message[3]);
                                 lpFragment.toggleGameHasBall();
                                 Velocity v = new Velocity(speedX, speedY, angle);
+
+                                // Display ball speed for testing.
+                                if(DEBUG_MODE)
+                                Toast.makeText(activity,"SpeedX: " + speedX
+                                        + " SpeedY: " + speedY, Toast.LENGTH_SHORT).show();
+
                                 activity.setBallStart(x, percY, v);
-                            }
-                            else {
+                            } else {
                                 Log.w("DATA_READ",
                                         "some gobbity-gook came through");
                             }
@@ -216,6 +227,8 @@ public class HandlerThread extends Thread {
                         case LongPongActivity.SCORE:
                             Log.i("SCORE / LPFRAGMENT",
                                     "About to send score notice to LongPongActivity.");
+                            //reset ball speed
+                            game.getBall().resetSpeed();
                             activity.sendScoreNotice();
                             break;
                     /*

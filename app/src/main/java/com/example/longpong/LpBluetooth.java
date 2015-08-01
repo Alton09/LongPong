@@ -1,10 +1,10 @@
 package com.example.longpong;
 
+import static com.example.longpong.LongPongActivity.DEBUG_MODE;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.lang.Thread.State;
-
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothServerSocket;
@@ -13,7 +13,6 @@ import android.os.Handler;
 import android.util.Log;
 
 public class LpBluetooth {
-    private final boolean    DEBUG_MODE = false;
     private BluetoothAdapter mBluetoothAdapter;
     private HandlerThread    mHandler;
 
@@ -288,12 +287,11 @@ public class LpBluetooth {
     }
 
     /*
-     * Initiates a Socket that connects to a listening Server.
+     * Initiates a connection with this device and the chosen remote device from the spinner
+     * UI in the BTFragment.
      * 
      * @author andrew.canastar
-     * 
      * @author john.qualls
-     * 
      * @version 1.0
      */
     private class ClientThread extends Thread {
@@ -302,8 +300,7 @@ public class LpBluetooth {
         private final BluetoothDevice mmDevice;
 
         /*
-         * Initializes the socket by using a BluetoothDevice object representing
-         * the listening server.
+         * Initializes the remote device, and the socket to connect to it.
          * 
          * @param device The BluetoothDevice reference.
          */

@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 /**
  * 
@@ -24,7 +25,13 @@ public class LPFragment extends Fragment {
 	private LongPongActivity activity;
 	
 	private HandlerThread mHandler;
-	
+
+	/**
+	 * Default constructor need for re-instatiation of Fragment. See Google Developer notes for<br>
+	 * more information.
+	 */
+	public LPFragment() {};
+
 	/**
 	 * Used to to get the MainHandler reference.
 	 */
@@ -50,8 +57,8 @@ public class LPFragment extends Fragment {
 		
 		super.onCreate(savedInstanceState);
 		game = new GameFramework(activity);
-		game.setHandler( mHandler );
-		game.setClientMode( activity.getClientMode());
+		game.setHandler(mHandler);
+		game.setClientMode(activity.getClientMode());
 		mHandler.setGame(game);
 		return game;
 	}
